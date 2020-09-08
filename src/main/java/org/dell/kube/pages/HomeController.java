@@ -15,9 +15,9 @@ public class HomeController {
         this.pageContent=pageContent;
     }
 
+
     @GetMapping
     public String getPage(){
         return "Hello from page : "+pageContent+" ";
     }
-
 }

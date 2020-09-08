@@ -17,7 +17,7 @@ spec:
         app: pages
     spec:
       containers:
-        - image: anup1008/pages:2.0
+        - image: anup1008/pages:pipeline
           name: pages
           ports:
             - containerPort: 8080

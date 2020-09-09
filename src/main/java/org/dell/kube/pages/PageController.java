@@ -1,6 +1,8 @@
 package org.dell.kube.pages;
 import org.dell.kube.pages.IPageRepository;
 import org.dell.kube.pages.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import java.util.List;
 @RequestMapping("/pages")
 public class PageController {
     private IPageRepository pageRepository;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     public PageController(IPageRepository pageRepository)
     {
         this.pageRepository = pageRepository;
@@ -22,11 +25,17 @@ public class PageController {
     }
     @GetMapping("{id}")
     public ResponseEntity<Page> read(@PathVariable long id) {
+
+        logger.info("READ-INFO:Fetching page with id = " + id);
+        logger.debug("READ-DEBUG:Fetching page with id = " + id);
+
         Page page = pageRepository.read(id);
         if(page!=null)
             return new ResponseEntity<Page>(page, HttpStatus.OK);
-        else
+        else {
+            logger.error("READ-ERROR:Could not find page with id = " + id);
             return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
     @GetMapping
     public ResponseEntity<List<Page>> list() {

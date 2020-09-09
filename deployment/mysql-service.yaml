@@ -5,11 +5,11 @@ metadata:
   namespace: beta2
   labels:
     app: pages
-    tier: database
+    tier: service
 spec:
   ports:
     - port: 3306
   selector:
     app: pages
-    tier: database
+    tier: service
   type: NodePort

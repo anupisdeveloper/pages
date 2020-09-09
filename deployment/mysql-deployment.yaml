@@ -5,19 +5,19 @@ metadata:
   namespace: beta2
   labels:
     app: pages
-    tier: database
+    tier: service
 spec:
   selector:
     matchLabels:
       app: pages
-      tier: database
+      tier: service
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: pages
-        tier: database
+        tier: service
     spec:
       containers:
         - image: mysql:8.0
